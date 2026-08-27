@@ -1,0 +1,39 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShopSphere Review Service</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+         max-width: 44rem; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1.4rem; margin: 0 0 .25rem; }
+  p.lede { margin: 0 0 2rem; opacity: .7; }
+  h2 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em;
+       opacity: .55; margin: 2rem 0 .5rem; }
+  ul { margin: 0; padding-left: 1.1rem; }
+  li { margin: .3rem 0; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; }
+  a { color: inherit; }
+</style>
+<h1>ShopSphere Review Service</h1>
+<p class="lede">Product reviews, extracted from the monolith and deployed on its own.</p>
+
+<h2>Health</h2>
+<ul>
+  <li><a href="/api/health"><code>/api/health</code></a> — checks the MongoDB connection</li>
+</ul>
+
+<h2>Endpoints</h2>
+<ul>
+  <li><a href="/api"><code>/api</code></a> — service metadata</li>
+  <li><code>/api/products/:identifier/reviews</code> — list, create, update, delete</li>
+  <li><code>/api/reviews/count</code> — total, read by the admin dashboard</li>
+</ul>
+
+<h2>How it stays independent</h2>
+<ul>
+  <li>Reviews live in its own MongoDB database.</li>
+  <li>Products are resolved over REST against the main API, not by a shared database.</li>
+  <li>Callers' tokens are forwarded to the main API for identity, so this service
+      holds no signing secret and no PostgreSQL credential.</li>
+</ul>
