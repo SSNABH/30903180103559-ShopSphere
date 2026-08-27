@@ -1,0 +1,29 @@
+import { Router } from 'express';
+import { createProductController } from '../controllers/productController.js';
+import { createReviewController } from '../controllers/reviewController.js';
+import { authorize, createAuthenticate } from '../middlewares/authenticate.js';
+import { uploadProductImages } from '../middlewares/productUpload.js';
+import { validateBody, validateQuery } from '../middlewares/validate.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
+import { createProductSchema, productQuerySchema, updateProductSchema } from '../validators/commerceSchemas.js';
+import { paginationSchema, reviewSchema, updateReviewSchema } from '../validators/serviceSchemas.js';
+
+export function createProductRouter({ productService, reviewService, userRepository }) {
+  const router = Router();
+  const controller = createProductController(productService);
+  const reviews = createReviewController(reviewService);
+  const authenticate = createAuthenticate(userRepository);
+
+  router.get('/', validateQuery(productQuerySchema), asyncHandler(controller.list));
+  router.get('/:identifier/reviews', validateQuery(paginationSchema), asyncHandler(reviews.list));
+  router.post('/:identifier/reviews', authenticate, validateBody(reviewSchema), asyncHandler(reviews.create));
+  router.patch('/:identifier/reviews/:reviewId', authenticate, validateBody(updateReviewSchema), asyncHandler(reviews.update));
+  router.delete('/:identifier/reviews/:reviewId', authenticate, asyncHandler(reviews.delete));
+  router.get('/:identifier', asyncHandler(controller.get));
+  router.post('/', authenticate, authorize('ADMIN'), validateBody(createProductSchema), asyncHandler(controller.create));
+  router.patch('/:id', authenticate, authorize('ADMIN'), validateBody(updateProductSchema), asyncHandler(controller.update));
+  router.delete('/:id', authenticate, authorize('ADMIN'), asyncHandler(controller.delete));
+  router.post('/:id/images', authenticate, authorize('ADMIN'), uploadProductImages, asyncHandler(controller.addImages));
+  router.delete('/:id/images/:imageId', authenticate, authorize('ADMIN'), asyncHandler(controller.deleteImage));
+  return router;
+}

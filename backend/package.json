@@ -1,0 +1,56 @@
+{
+  "name": "deci-project-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Express API for the DECI.Project e-commerce platform",
+  "main": "src/server.js",
+  "scripts": {
+    "postinstall": "npm run prisma:generate",
+    "dev": "nodemon --exec node src/server.js",
+    "start": "node src/server.js",
+    "lint": "node scripts/check-syntax.js",
+    "test": "npm run test:legacy && npm run test:jest",
+    "test:watch": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --watch",
+    "prisma:generate": "node scripts/run-prisma.js generate",
+    "prisma:validate": "node scripts/run-prisma.js validate",
+    "prisma:migrate": "node scripts/run-prisma.js migrate dev",
+    "prisma:deploy": "node scripts/run-prisma.js migrate deploy",
+    "prisma:seed": "node scripts/run-prisma.js db seed",
+    "prisma:studio": "node scripts/run-prisma.js studio",
+    "db:migrate": "node --experimental-strip-types scripts/apply-migrations.js",
+    "db:seed": "node --experimental-strip-types prisma/seed.js",
+    "test:legacy": "node --experimental-strip-types --test tests/*.test.js",
+    "test:unit": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand tests/jest/unit",
+    "test:integration": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand tests/jest/integration",
+    "test:jest": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand",
+    "test:coverage": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand --coverage",
+    "test:legacy:watch": "node --experimental-strip-types --test --watch tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "7.9.0",
+    "@prisma/client": "7.9.0",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.6.2",
+    "helmet": "^8.1.0",
+    "mongoose": "^9.7.4",
+    "morgan": "^1.10.1",
+    "multer": "^2.2.0",
+    "nodemailer": "9.0.3",
+    "pg": "^8.22.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.11",
+    "prisma": "7.9.0",
+    "supertest": "^7.1.4"
+  }
+}

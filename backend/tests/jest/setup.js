@@ -1,0 +1,9 @@
+process.env.NODE_ENV = 'test';
+process.env.DATABASE_URL = 'postgresql://deci:test@localhost:5432/deci_test?schema=public';
+process.env.MONGODB_URI = 'mongodb://localhost:27017/deci_test';
+process.env.CORS_ORIGIN = 'http://localhost:3000';
+process.env.JWT_ACCESS_SECRET = 'jest_access_secret_that_is_long_enough_12345';
+process.env.JWT_REFRESH_SECRET = 'jest_refresh_secret_that_is_long_enough_67890';
+process.env.JWT_ACCESS_EXPIRES_IN = '15m';
+process.env.JWT_REFRESH_EXPIRES_IN = '7d';
+process.env.DATABASE_CONNECTION_REQUIRED = 'false';

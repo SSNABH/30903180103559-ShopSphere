@@ -1,0 +1,23 @@
+{
+  "name": "deci-project-ecommerce",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bilingual full-stack electronics e-commerce graduation project",
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "test": "npm run test:backend && npm run test:frontend",
+    "build": "npm run build --prefix frontend",
+    "lint": "npm run lint --prefix backend && npm run lint --prefix frontend",
+    "verify": "npm run verify:source && npm run verify:tests && npm run build --prefix frontend && npm run verify:delivery",
+    "test:backend": "npm test --prefix backend",
+    "test:frontend": "npm test --prefix frontend",
+    "verify:delivery": "node scripts/verify-delivery.mjs",
+    "verify:tests": "npm run lint && npm run test && npm run prisma:validate --prefix backend && npm run test:phase4 --prefix frontend && npm run test:phase5 --prefix frontend",
+    "verify:source": "node scripts/verify-source-integrity.mjs"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  font-family: 'Manrope', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  color: #17191f;
+  background: #f3f0e9;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --background: #f3f0e9;
+  --surface: rgba(255, 255, 255, 0.68);
+  --surface-solid: #fffdf8;
+  --text: #17191f;
+  --muted: #67696f;
+  --line: rgba(23, 25, 31, 0.15);
+  --accent: #ff5a36;
+  --accent-soft: rgba(255, 90, 54, 0.12);
+  --success: #168263;
+  --danger: #cc3d3d;
+  --shadow: 0 25px 65px rgba(29, 27, 22, 0.08);
+}
+
+:root[data-theme='dark'] {
+  color: #f5f1e8;
+  background: #111214;
+  --background: #111214;
+  --surface: rgba(30, 31, 35, 0.82);
+  --surface-solid: #1c1d21;
+  --text: #f5f1e8;
+  --muted: #a8a7a1;
+  --line: rgba(245, 241, 232, 0.14);
+  --accent: #ff795a;
+  --accent-soft: rgba(255, 121, 90, 0.14);
+  --success: #4ed4aa;
+  --danger: #ff7b7b;
+  --shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--background);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 85% 8%, var(--accent-soft), transparent 32rem),
+    var(--background);
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--accent-soft);
+  outline-offset: 3px;
+}
