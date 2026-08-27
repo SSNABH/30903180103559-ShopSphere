@@ -67,7 +67,7 @@ const readme = readFileSync('README.txt', 'utf8');
 for (const section of ['PROJECT SUMMARY', 'TECHNOLOGIES USED', 'DOCKER QUICK START', 'PROJECT URLS', 'TEST ACCOUNTS', 'IMPORTANT NOTES']) {
   if (!readme.includes(section)) throw new Error(`README.txt section is missing: ${section}`);
 }
-if (!readme.includes('fullstack-ecommerce-shady-sameh')) {
+if (!readme.includes('30903180103559-ShopSphere')) {
   throw new Error('README.txt does not contain the finalized repository name.');
 }
 if (!readme.includes('Readiness Check: http://localhost:5000/api/health/ready')) {
