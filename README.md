@@ -14,10 +14,10 @@ review service and a serverless job, and released through a CI/CD pipeline.
 > repository URLs, the reviewer accounts, and a map of where each task is
 > evidenced.
 
-The storefront was built in the first semester under the working name
-*DECI.Project*. Some seeded product data, order numbers, and e-mail templates
-still carry that name; the platform, this repository, and every submitted
-document are ShopSphere.
+The storefront carries the product name *DECI.Project*, the name it was built
+under in the first semester, and it is unchanged here. The platform it belongs
+to, this repository, and every submitted document are ShopSphere: the naming
+convention applies to the deliverables, not to the application's own branding.
 
 ## Where production logs are read
 

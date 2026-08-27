@@ -20,8 +20,8 @@ export function AppLayout() {
   return (
     <div className="site-shell">
       <header className="topbar">
-        <NavLink className="brand" to="/" aria-label="ShopSphere home" onClick={closeMenu}>
-          <span className="brand-mark">S</span><span>ShopSphere</span>
+        <NavLink className="brand" to="/" aria-label="DECI.Project home" onClick={closeMenu}>
+          <span className="brand-mark">D</span><span>DECI.Project</span>
         </NavLink>
         <button className="mobile-menu-button" type="button" onClick={() => setMenuOpen((open) => !open)} aria-expanded={menuOpen} aria-label={menuOpen ? commerce.closeMenu : commerce.openMenu}>
           {menuOpen ? <X /> : <Menu />}
@@ -53,7 +53,7 @@ export function AppLayout() {
         </div>
       </header>
       <Outlet />
-      <footer className="site-footer"><div><span className="brand-mark">S</span><strong>ShopSphere</strong></div><p>Full-stack electronics commerce · React · Express · PostgreSQL · MongoDB</p><small>© 2026 ShopSphere</small></footer>
+      <footer className="site-footer"><div><span className="brand-mark">D</span><strong>DECI.Project</strong></div><p>Full-stack electronics commerce · React · Express · PostgreSQL · MongoDB</p><small>© 2026 DECI.Project</small></footer>
     </div>
   );
 }

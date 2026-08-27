@@ -3,7 +3,7 @@ export const foundationContent = {
     eyebrow: 'FULL-STACK ELECTRONICS COMMERCE',
     title: 'A dependable foundation for every shopping experience.',
     description:
-      'ShopSphere connects a React storefront to an Express API, PostgreSQL through Prisma, and MongoDB for flexible services.',
+      'DECI.Project connects a React storefront to an Express API, PostgreSQL through Prisma, and MongoDB for flexible services.',
     phase: 'Phase 2 · Secure accounts ready',
     live: 'Live system status',
     apiOnline: 'API process online',
@@ -27,7 +27,7 @@ export const foundationContent = {
     eyebrow: 'متجر إلكترونيات متكامل',
     title: 'أساس موثوق لكل تجربة تسوق.',
     description:
-      'يربط مشروع ShopSphere واجهة React بواجهة Express وقاعدة PostgreSQL من خلال Prisma وMongoDB للخدمات المرنة.',
+      'يربط مشروع DECI.Project واجهة React بواجهة Express وقاعدة PostgreSQL من خلال Prisma وMongoDB للخدمات المرنة.',
     phase: 'المرحلة الثانية · الحسابات الآمنة جاهزة',
     live: 'حالة النظام المباشرة',
     apiOnline: 'واجهة الخادم تعمل',

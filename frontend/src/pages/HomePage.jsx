@@ -41,7 +41,7 @@ export function HomePage() {
         </div>
         <div className="hero-device-stage" aria-hidden="true">
           <div className="device-card device-card-main">
-            <span>SHOP</span><strong>01</strong><small>SMART TECH</small>
+            <span>DECI</span><strong>01</strong><small>SMART TECH</small>
           </div>
           <div className="device-card device-card-side"><ShoppingBag size={36} /></div>
           <div className="device-orbit" />
@@ -94,7 +94,7 @@ export function HomePage() {
           </section>
 
           <section className="store-promotion">
-            <div><p className="eyebrow">SHOPSPHERE / ELECTRONICS</p><h2>{copy.promotionTitle}</h2><p>{copy.promotionText}</p></div>
+            <div><p className="eyebrow">DECI.PROJECT / ELECTRONICS</p><h2>{copy.promotionTitle}</h2><p>{copy.promotionText}</p></div>
             <Link className="primary-button light-button link-button" to="/products">{copy.promotionAction}<ArrowRight size={18} /></Link>
           </section>
         </>

@@ -27,10 +27,10 @@ by UptimeRobot, split so that reviews run as an independently deployed service
 and abandoned-cart cleanup runs as a serverless function, and released through a
 GitHub Actions pipeline with three environments and a documented rollback plan.
 
-The storefront was built in the first semester under the working name
-DECI.Project. Some seeded product data, order numbers, and e-mail templates still
-carry that name. The platform, this repository, and every submitted document are
-ShopSphere.
+The storefront carries the product name DECI.Project, the name it was built under
+in the first semester, and it is unchanged here. The platform it belongs to, this
+repository, and every submitted document are ShopSphere. The naming convention
+applies to the deliverables, not to the application's own branding.
 
 PROJECT STATUS
 Task 1 - Production Deployment: COMPLETE

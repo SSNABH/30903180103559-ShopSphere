@@ -59,7 +59,7 @@ Each running instance also reports which environment answered:
 
 ```
 $ curl -s https://shopsphere-store-api.vercel.app/api/health
-{"success":true,"project":"ShopSphere","status":"healthy","environment":"production", ...}
+{"success":true,"project":"DECI.Project","status":"healthy","environment":"production", ...}
 ```
 
 A preview deployment of the same code answers `"environment":"staging"`, and a

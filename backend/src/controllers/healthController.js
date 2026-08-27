@@ -16,7 +16,7 @@ function currentEnvironment() {
 export function live(req, res) {
   res.json({
     success: true,
-    service: 'shopsphere-api',
+    service: 'deci-project-api',
     status: 'up',
     environment: currentEnvironment(),
     timestamp: new Date().toISOString(),
@@ -63,7 +63,7 @@ export const overview = asyncHandler(async (req, res) => {
   const allHealthy = Object.values(checks).every(Boolean);
   res.status(allHealthy ? 200 : 503).json({
     success: allHealthy,
-    project: 'ShopSphere',
+    project: 'DECI.Project',
     status: allHealthy ? 'healthy' : 'degraded',
     environment: currentEnvironment(),
     checks,

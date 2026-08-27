@@ -21,6 +21,6 @@ test("GET /api/health/live reports that the API is alive", async (t) => {
 
   assert.equal(response.status, 200);
   assert.equal(body.success, true);
-  assert.equal(body.service, "shopsphere-api");
+  assert.equal(body.service, "deci-project-api");
   assert.equal(body.status, "up");
 });
