@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
 
+// Unchanged from the monolith. The reviews collection moves with the service
+// rather than being copied, so existing documents stay readable.
 const reviewSchema = new mongoose.Schema(
   {
     productId: { type: String, required: true, index: true },

@@ -1,4 +1,4 @@
-import { api } from './api.js';
+import { api, reviewApi } from './api.js';
 
 export const apiOrigin = (api.defaults.baseURL ?? 'http://localhost:5000/api').replace(/\/api\/?$/, '');
 
@@ -11,10 +11,11 @@ export const commerceApi = {
   categories: () => api.get('/categories').then((response) => response.data.data.categories),
   products: (params) => api.get('/products', { params }).then((response) => response.data.data),
   product: (identifier) => api.get(`/products/${identifier}`).then((response) => response.data.data.product),
-  reviews: (identifier, params = {}) => api.get(`/products/${identifier}/reviews`, { params }).then((response) => response.data.data),
-  createReview: ({ identifier, data }) => api.post(`/products/${identifier}/reviews`, data).then((response) => response.data.data.review),
-  updateReview: ({ identifier, reviewId, data }) => api.patch(`/products/${identifier}/reviews/${reviewId}`, data).then((response) => response.data.data.review),
-  deleteReview: ({ identifier, reviewId }) => api.delete(`/products/${identifier}/reviews/${reviewId}`).then((response) => response.data.data.review),
+  // Served by the review service. The paths are unchanged; only the origin moved.
+  reviews: (identifier, params = {}) => reviewApi.get(`/products/${identifier}/reviews`, { params }).then((response) => response.data.data),
+  createReview: ({ identifier, data }) => reviewApi.post(`/products/${identifier}/reviews`, data).then((response) => response.data.data.review),
+  updateReview: ({ identifier, reviewId, data }) => reviewApi.patch(`/products/${identifier}/reviews/${reviewId}`, data).then((response) => response.data.data.review),
+  deleteReview: ({ identifier, reviewId }) => reviewApi.delete(`/products/${identifier}/reviews/${reviewId}`).then((response) => response.data.data.review),
   createCategory: (data) => api.post('/categories', data).then((response) => response.data.data.category),
   updateCategory: ({ id, data }) => api.patch(`/categories/${id}`, data).then((response) => response.data.data.category),
   deleteCategory: (id) => api.delete(`/categories/${id}`).then((response) => response.data.data.category),

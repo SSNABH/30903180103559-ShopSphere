@@ -1,0 +1,26 @@
+{
+  "name": "shopsphere-review-service",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Independently deployed review service extracted from the ShopSphere monolith",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "lint": "node --check src/app.js && node --check src/server.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.6.2",
+    "helmet": "^8.1.0",
+    "mongoose": "^9.7.4",
+    "zod": "^4.1.12"
+  }
+}

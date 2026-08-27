@@ -1,11 +1,15 @@
 import { serializeOrder } from '../utils/commerceSerializers.js';
 
-export function createStatisticsService(statisticsRepository, reviewRepository, activityLogService) {
+// reviewSource was the reviews repository when reviews lived in this
+// application. It is now the REST client for the review service, which returns
+// null when that service cannot be reached so the rest of the dashboard still
+// renders.
+export function createStatisticsService(statisticsRepository, reviewSource, activityLogService) {
   return {
     async overview() {
       const [relational, totalReviews, totalActivityLogs] = await Promise.all([
         statisticsRepository.overview(),
-        reviewRepository.countAll(),
+        reviewSource.countAll(),
         activityLogService.countAll(),
       ]);
       return {

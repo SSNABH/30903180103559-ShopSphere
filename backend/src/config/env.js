@@ -12,6 +12,9 @@ const schema = z.object({
   DATABASE_URL: z.string().min(1),
   MONGODB_URI: z.string().min(1),
   CORS_ORIGIN: z.string().min(1).default('http://localhost:3000'),
+  // Reviews were extracted into an independently deployed service. The admin
+  // statistics endpoint asks it for the review count over REST.
+  REVIEW_SERVICE_URL: z.string().url().default('http://localhost:5100'),
   JWT_ACCESS_SECRET: z.string().min(32),
   JWT_REFRESH_SECRET: z.string().min(32),
   JWT_ACCESS_EXPIRES_IN: z.string().default('15m'),

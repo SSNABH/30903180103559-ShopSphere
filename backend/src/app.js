@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { reviewServiceClient as defaultReviewServiceClient } from './clients/reviewServiceClient.js';
 import { env } from './config/env.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFound } from './middlewares/notFound.js';
@@ -15,7 +16,6 @@ import { cartRepository as defaultCartRepository } from './repositories/cartRepo
 import { categoryRepository as defaultCategoryRepository } from './repositories/categoryRepository.js';
 import { orderRepository as defaultOrderRepository } from './repositories/orderRepository.js';
 import { productRepository as defaultProductRepository } from './repositories/productRepository.js';
-import { reviewRepository as defaultReviewRepository } from './repositories/reviewRepository.js';
 import { statisticsRepository as defaultStatisticsRepository } from './repositories/statisticsRepository.js';
 import { userRepository as defaultUserRepository } from './repositories/userRepository.js';
 import { createActivityLogRouter } from './routes/activityLogRoutes.js';
@@ -34,7 +34,6 @@ import { createCategoryService } from './services/categoryService.js';
 import { emailService as defaultEmailService } from './services/emailService.js';
 import { createOrderService } from './services/orderService.js';
 import { createProductService } from './services/productService.js';
-import { createReviewService } from './services/reviewService.js';
 import { createStatisticsService } from './services/statisticsService.js';
 import { createUserService } from './services/userService.js';
 
@@ -73,7 +72,7 @@ export function createApp(options = {}) {
   const productRepository = options.productRepository ?? defaultProductRepository;
   const cartRepository = options.cartRepository ?? defaultCartRepository;
   const orderRepository = options.orderRepository ?? defaultOrderRepository;
-  const reviewRepository = options.reviewRepository ?? defaultReviewRepository;
+  const reviewSource = options.reviewSource ?? defaultReviewServiceClient;
   const statisticsRepository = options.statisticsRepository ?? defaultStatisticsRepository;
   const activityLogService = options.activityLogService ?? (env.NODE_ENV === 'test' ? noOpActivityLogService : createActivityLogService(defaultActivityLogRepository));
   const emailService = options.emailService ?? (env.NODE_ENV === 'test' ? testEmailService : defaultEmailService);
@@ -83,8 +82,7 @@ export function createApp(options = {}) {
   const productService = options.productService ?? createProductService(productRepository, categoryRepository, activityLogService);
   const cartService = options.cartService ?? createCartService(cartRepository, productRepository);
   const orderService = options.orderService ?? createOrderService(orderRepository);
-  const reviewService = options.reviewService ?? createReviewService(reviewRepository, productRepository, activityLogService);
-  const statisticsService = options.statisticsService ?? createStatisticsService(statisticsRepository, reviewRepository, activityLogService);
+  const statisticsService = options.statisticsService ?? createStatisticsService(statisticsRepository, reviewSource, activityLogService);
   const application = express();
 
   // Vercel terminates TLS at its edge, so the real client IP arrives in
@@ -111,7 +109,7 @@ export function createApp(options = {}) {
   application.use('/api/auth', authLimiter, createAuthRouter({ authService, userRepository }));
   application.use('/api/users', createUserRouter({ userService, userRepository }));
   application.use('/api/categories', createCategoryRouter({ categoryService, userRepository }));
-  application.use('/api/products', createProductRouter({ productService, reviewService, userRepository }));
+  application.use('/api/products', createProductRouter({ productService, userRepository }));
   application.use('/api/cart', createCartRouter({ cartService, userRepository }));
   application.use('/api/orders', createOrderRouter({ orderService, userRepository }));
   application.use('/api/statistics', createStatisticsRouter({ statisticsService, userRepository }));

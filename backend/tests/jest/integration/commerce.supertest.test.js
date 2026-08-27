@@ -69,7 +69,7 @@ async function createFixture() {
   app.use(express.json());
   app.use(cookieParser());
   app.use('/api/auth', createAuthRouter({ authService, userRepository: memory.userRepository }));
-  app.use('/api/products', createProductRouter({ productService, reviewService, userRepository: memory.userRepository }));
+  app.use('/api/products', createProductRouter({ productService, userRepository: memory.userRepository }));
   app.use('/api/cart', createCartRouter({ cartService, userRepository: memory.userRepository }));
   app.use('/api/orders', createOrderRouter({ orderService, userRepository: memory.userRepository }));
   app.use(notFound);

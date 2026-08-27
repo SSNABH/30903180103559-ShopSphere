@@ -9,12 +9,24 @@ export function createReviewController(reviewService) {
       return res.status(201).json({ success: true, message: 'Review created successfully.', data: { review } });
     },
     update: async (req, res) => {
-      const review = await reviewService.update(req.params.identifier, req.params.reviewId, req.user, req.validatedBody);
+      const review = await reviewService.update(
+        req.params.identifier,
+        req.params.reviewId,
+        req.user,
+        req.validatedBody,
+      );
       return res.json({ success: true, message: 'Review updated successfully.', data: { review } });
     },
     delete: async (req, res) => {
       const review = await reviewService.delete(req.params.identifier, req.params.reviewId, req.user);
       return res.json({ success: true, message: 'Review deleted successfully.', data: { review } });
+    },
+    // Serves the main application's admin statistics, which can no longer read
+    // the reviews collection directly.
+    count: async (req, res) => {
+      void req;
+      const total = await reviewService.countAll();
+      return res.json({ success: true, data: { total } });
     },
   };
 }
