@@ -42,9 +42,17 @@ All four tasks of the Level 5 project are complete.
 | **3 — Application Modernization** | Reviews extracted into their own deployed service, serverless cleanup job, ADR | [ADR](docs/30903180103559-ShopSphere-architecture-decision-record.md) · [job evidence](docs/30903180103559-ShopSphere-serverless-job-evidence.md) · [`review-service/`](review-service/) · [`jobs/`](jobs/) |
 | **4 — Production Operations** | GitHub Actions pipeline, three environments, structured logging, rollback plan | [pipeline](.github/workflows/deploy.yml) · [environments](docs/30903180103559-ShopSphere-environments.md) · [logging](docs/30903180103559-ShopSphere-logging-and-operations.md) · [rollback plan](docs/30903180103559-ShopSphere-rollback-plan.md) |
 
-The first-semester implementation phases this platform grew out of — setup,
-authentication, catalog and cart, frontend, database services, and testing — are
-all complete and still covered by the test suite below.
+### First-semester implementation phases
+
+All six phases the platform grew out of are complete, and still covered by the
+test suite below:
+
+1. Project setup and architecture
+2. Authentication and user management
+3. Product and shopping features
+4. Complete frontend and Admin Dashboard
+5. Database and additional services
+6. Testing and delivery preparation
 
 ## Main capabilities
 

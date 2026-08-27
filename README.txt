@@ -33,14 +33,20 @@ repository, and every submitted document are ShopSphere. The naming convention
 applies to the deliverables, not to the application's own branding.
 
 PROJECT STATUS
+Level 5 - ShopSphere Enterprise Production and Cloud Modernization:
 Task 1 - Production Deployment: COMPLETE
 Task 2 - Cloud Preparation: COMPLETE
 Task 3 - Application Modernization: COMPLETE
 Task 4 - Production Operations: COMPLETE
 
-The first-semester implementation phases the platform grew out of - setup and
-architecture, authentication, catalog and cart, frontend, database services, and
-testing - are complete and still covered by the test suite.
+First semester - platform implementation. All six phases are complete and still
+covered by the test suite:
+Task 1 - Project setup and architecture: COMPLETE
+Task 2 - Authentication and user management: COMPLETE
+Task 3 - Product and shopping features: COMPLETE
+Task 4 - Frontend development: COMPLETE
+Task 5 - Database and additional services: COMPLETE
+Task 6 - Testing and project delivery preparation: COMPLETE
 
 TECHNOLOGIES USED
 Frontend:
@@ -113,17 +119,7 @@ Readiness Check: http://localhost:5000/api/health/ready
 Mailpit Inbox: http://localhost:8025
 
 TEST ACCOUNTS
-Production, for the deployed application:
-
-Admin
-Email: admin@shopsphere.local
-Password: Admin123!
-
-Customer
-Email: customer@shopsphere.local
-Password: Customer123!
-
-Local, created by the included seed data when running with Docker:
+These accounts are created by the included seed data for a local run.
 
 Admin
 Email: admin@deci-project.local
@@ -132,6 +128,10 @@ Password: Admin123!
 Customer
 Email: customer@deci-project.local
 Password: Customer123!
+
+The accounts for the deployed production application are different. They are
+listed in 30903180103559-ShopSphere.md, and are kept in that one file only so
+they cannot fall out of step with each other.
 
 LOCAL DEVELOPMENT WITHOUT DOCKER
 Requirements:
