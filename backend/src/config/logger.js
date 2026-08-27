@@ -62,8 +62,9 @@ export const httpLogger = pinoHttp({
     res: (res) => ({ statusCode: res.statusCode }),
   },
 
-  // Health checks run every five minutes forever. Logging them at info would
-  // bury real traffic, so they drop to debug and stay out of the way.
+  // Health checks run every five minutes forever and would bury real traffic.
+  // Marking them keeps them filterable: `-"routine":true` in the Logs tab
+  // leaves only requests a user actually made.
   customProps(req) {
     return req.url?.startsWith('/api/health') ? { routine: true } : {};
   },
