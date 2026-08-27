@@ -1,0 +1,149 @@
+name: Deploy to production
+
+# Verification runs on every pull request, which is what branch protection
+# requires before a merge into main is allowed. Deployment runs only after a
+# merge has landed on main.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Install, lint, test, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
+            review-service/package-lock.json
+            jobs/package-lock.json
+
+      # Install
+      - name: Install backend dependencies
+        run: npm ci --prefix backend
+
+      - name: Install frontend dependencies
+        run: npm ci --prefix frontend
+
+      - name: Install review service dependencies
+        run: npm ci --prefix review-service
+
+      - name: Install job dependencies
+        run: npm ci --prefix jobs
+
+      - name: Lint
+        run: |
+          npm run lint --prefix backend
+          npm run lint --prefix frontend
+          npm run lint --prefix review-service
+
+      - name: Test
+        run: |
+          npm test --prefix backend
+          npm test --prefix frontend
+          npm test --prefix review-service
+
+      # Build
+      - name: Build frontend
+        run: npm run build --prefix frontend
+        env:
+          VITE_API_BASE_URL: https://shopsphere-store-api.vercel.app/api
+          VITE_REVIEW_SERVICE_URL: https://shopsphere-reviews.vercel.app/api
+
+  deploy:
+    name: Deploy ${{ matrix.service }}
+    needs: verify
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+
+    strategy:
+      # One failed service should not hide whether the others deployed.
+      fail-fast: false
+      matrix:
+        include:
+          - service: api
+            directory: backend
+            project_id_secret: VERCEL_PROJECT_ID_API
+          - service: storefront
+            directory: frontend
+            project_id_secret: VERCEL_PROJECT_ID_WEB
+          - service: reviews
+            directory: review-service
+            project_id_secret: VERCEL_PROJECT_ID_REVIEWS
+          - service: jobs
+            directory: jobs
+            project_id_secret: VERCEL_PROJECT_ID_JOBS
+
+    env:
+      # Read from GitHub Actions secrets. No credential is written into this
+      # file, and Actions masks the values in the run logs.
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets[matrix.project_id_secret] }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull production environment configuration
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+        working-directory: ${{ matrix.directory }}
+
+      - name: Build
+        run: vercel build --prod --token="$VERCEL_TOKEN"
+        working-directory: ${{ matrix.directory }}
+
+      - name: Deploy to production
+        run: vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+        working-directory: ${{ matrix.directory }}
+
+  smoke:
+    name: Verify production responds
+    needs: deploy
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # A deployment that reports success but serves errors is still a failed
+      # release. This is the same signal the rollback plan depends on.
+      - name: Check the API health endpoint
+        run: |
+          status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 \
+            https://shopsphere-store-api.vercel.app/api/health)
+          echo "API health returned $status"
+          test "$status" = "200"
+
+      - name: Check the review service health endpoint
+        run: |
+          status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 \
+            https://shopsphere-reviews.vercel.app/api/health)
+          echo "Review service health returned $status"
+          test "$status" = "200"
+
+      - name: Check the storefront loads
+        run: |
+          status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 \
+            https://shopsphere-storefront.vercel.app)
+          echo "Storefront returned $status"
+          test "$status" = "200"

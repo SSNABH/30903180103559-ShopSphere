@@ -27,7 +27,14 @@ function resolvesImport(sourceFile, specifier) {
   return candidates.some(existsSync);
 }
 
-for (const sourceFile of collect('frontend/src', ['.js', '.jsx']).concat(collect('backend', ['.js']))) {
+// The review service and the scheduled jobs are separate packages, so their
+// imports are swept alongside the two original ones.
+const sourceTrees = collect('frontend/src', ['.js', '.jsx'])
+  .concat(collect('backend', ['.js']))
+  .concat(collect('review-service/src', ['.js']))
+  .concat(collect('jobs/api', ['.js']));
+
+for (const sourceFile of sourceTrees) {
   const source = read(sourceFile);
   const importPattern = /(?:import\s+(?:[^'\"]+?\s+from\s+)?|export\s+[^'\"]*?from\s+|import\()(['\"])(\.\.?\/[^'\"]+)\1/g;
   for (const match of source.matchAll(importPattern)) {
@@ -51,7 +58,7 @@ for (const area of ['backend', 'frontend']) {
 const apiSource = read('frontend/src/lib/api.js');
 pass(!apiSource.includes("headers: { 'Content-Type': 'application/json' }"), 'Axios still forces JSON content type globally');
 pass(read('frontend/src/lib/commerce.test.js').includes('multipart\\/form-data') && read('frontend/src/lib/commerce.test.js').includes('boundary='), 'Multipart upload regression test is missing');
-pass(read('backend/src/services/reviewService.js').includes('isValidObjectId'), 'Review ID validation is missing');
+pass(read('review-service/src/services/reviewService.js').includes('isValidObjectId'), 'Review ID validation is missing');
 pass(read('frontend/src/pages/AdminCatalogPage.jsx').includes('imageUploadPartialSuccess'), 'Partial image-upload success handling is missing');
 pass(read('frontend/src/pages/CartPage.jsx').includes('increaseQuantity'), 'Cart stock-boundary controls are missing');
 
@@ -59,7 +66,9 @@ const compose = read('docker-compose.yml');
 pass(/mailpit:\s*[\s\S]*?image:\s*axllent\/mailpit:v\d+\.\d+\.\d+/m.test(compose), 'Mailpit image is not pinned to an exact version');
 pass(!/axllent\/mailpit:latest/.test(compose), 'Mailpit still uses latest');
 
-const testFiles = collect('backend/tests', ['.js']).concat(collect('frontend/src', ['.test.js', '.test.jsx']));
+const testFiles = collect('backend/tests', ['.js'])
+  .concat(collect('frontend/src', ['.test.js', '.test.jsx']))
+  .concat(collect('review-service/tests', ['.js']));
 let testDeclarations = 0;
 for (const file of testFiles) {
   const source = read(file);

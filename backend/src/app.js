@@ -4,11 +4,12 @@ import cors from 'cors';
 import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
-import morgan from 'morgan';
+
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { reviewServiceClient as defaultReviewServiceClient } from './clients/reviewServiceClient.js';
 import { env } from './config/env.js';
+import { httpLogger } from './config/logger.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFound } from './middlewares/notFound.js';
 import { activityLogRepository as defaultActivityLogRepository } from './repositories/activityLogRepository.js';
@@ -97,7 +98,7 @@ export function createApp(options = {}) {
   application.use(express.json({ limit: '1mb' }));
   application.use(express.urlencoded({ extended: true, limit: '1mb' }));
   application.use(cookieParser());
-  if (env.NODE_ENV !== 'test') application.use(morgan(env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+  if (env.NODE_ENV !== 'test') application.use(httpLogger);
   application.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
   application.use('/api', generalLimiter);
 

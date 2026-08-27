@@ -2,6 +2,18 @@
 
 A complete bilingual electronics e-commerce platform built against the graduation-project rubric. It combines a React storefront and Admin Dashboard with an Express API, PostgreSQL/Prisma commerce data, MongoDB reviews and activity logs, automated email, comprehensive testing, and one-command Docker delivery.
 
+## Where production logs are read
+
+Requests and errors are emitted as structured JSON carrying a timestamp and a
+severity level. In production they are read in the **Vercel Dashboard, in the
+project's Logs tab** — `shopsphere-store-api` for the main API,
+`shopsphere-reviews` for the review service, and `shopsphere-jobs` for the
+scheduled cleanup. Because each line is one JSON object, the search box filters
+on any field: `"level":"error"` for failures, a `url` for one endpoint.
+
+Full detail, including the severity levels and what is redacted, is in
+[docs/30903180103559-ShopSphere-logging-and-operations.md](docs/30903180103559-ShopSphere-logging-and-operations.md).
+
 ## Project status
 
 All six implementation phases are complete and re-verified:

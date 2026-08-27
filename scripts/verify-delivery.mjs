@@ -12,7 +12,17 @@ const required = [
   'backend/.env.example',
   'README.txt',
   'README.md',
-  'backend/tests/jest/unit/review-service.test.js',
+  'review-service/',
+  'review-service/package.json',
+  'review-service/vercel.json',
+  'review-service/tests/reviewService.test.js',
+  'jobs/',
+  'jobs/api/cleanup-carts.js',
+  'jobs/vercel.json',
+  'k8s/namespaces.yaml',
+  'k8s/app/backend.yaml',
+  'k8s/app/frontend.yaml',
+  '.github/workflows/deploy.yml',
   'backend/tests/jest/integration/commerce.supertest.test.js',
   'frontend/src/contexts/AuthProvider.test.jsx',
   'frontend/src/pages/__tests__/AdminCatalogPage.test.jsx',
@@ -40,7 +50,7 @@ if (/axllent\/mailpit:latest/.test(compose) || !/axllent\/mailpit:v\d+\.\d+\.\d+
   throw new Error('Mailpit must use a pinned semantic-version image tag.');
 }
 
-for (const lockfile of ['backend/package-lock.json', 'frontend/package-lock.json']) {
+for (const lockfile of ['backend/package-lock.json', 'frontend/package-lock.json', 'review-service/package-lock.json', 'jobs/package-lock.json']) {
   JSON.parse(readFileSync(lockfile, 'utf8'));
 }
 
