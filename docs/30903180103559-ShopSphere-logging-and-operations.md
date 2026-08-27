@@ -56,7 +56,12 @@ An error:
 | `error` | 5xx responses and unhandled exceptions — a fault on our side |
 | `warn` | 4xx responses — the request was refused, which is the system working |
 | `info` | Successful requests |
-| `debug` | Health checks, which run every five minutes and would otherwise bury real traffic |
+
+Health checks run every five minutes forever and would otherwise bury real
+traffic, so they are kept out of the way rather than given a level of their own.
+The liveness probe `/api/health/live` is not logged at all, and the remaining
+health requests carry `"routine":true` on the entry — searching `-"routine":true`
+in the Logs tab leaves only real traffic.
 
 The distinction matters when a release goes wrong: a rise in `error` means the
 deployment broke something, while a rise in `warn` usually means a client is

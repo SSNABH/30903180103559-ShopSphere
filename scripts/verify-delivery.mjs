@@ -13,10 +13,12 @@ const required = [
   'README.txt',
   'README.md',
   'review-service/',
+  'review-service/.env.example',
   'review-service/package.json',
   'review-service/vercel.json',
   'review-service/tests/reviewService.test.js',
   'jobs/',
+  'jobs/.env.example',
   'jobs/api/cleanup-carts.js',
   'jobs/vercel.json',
   '30903180103559-ShopSphere.md',
@@ -97,6 +99,16 @@ try {
     .filter(Boolean);
 } catch {
   console.log('Git metadata is not present; tracked-file hygiene check skipped for this exported copy.');
+}
+
+if (tracked.length) {
+  const trackedSet = new Set(tracked);
+  const unpublished = required.filter((item) => (item.endsWith('/')
+    ? !tracked.some((file) => file.startsWith(item))
+    : !trackedSet.has(item)));
+  if (unpublished.length) {
+    throw new Error(`Required delivery items exist locally but are not tracked by git, so they are missing from the published repository: ${unpublished.join(', ')}`);
+  }
 }
 
 const forbidden = tracked.filter((file) => (

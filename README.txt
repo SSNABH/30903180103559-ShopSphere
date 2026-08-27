@@ -7,8 +7,9 @@ https://github.com/SSNABH/30903180103559-ShopSphere
 PROJECT LINKS DOCUMENT
 30903180103559-ShopSphere.md, in the root of this repository, is the entry point
 for the submission. It holds the application, review service, and repository
-URLs, the production reviewer accounts, and a map of where each task is
-evidenced.
+URLs, and a map of where each task is evidenced. The production sign-in details
+are in the submitted 30903180103559-ShopSphere.pdf, which is kept out of this
+repository because those accounts are live.
 
 PROJECT SUMMARY
 ShopSphere is a complete bilingual electronics e-commerce platform. Customers can
