@@ -45,9 +45,16 @@ variables, so the split is visible outside the hosting dashboard as well:
 |---|---|---|---|
 | `APP_ENV` | `development` | `staging` | `production` |
 | `LOG_LEVEL` | `debug` | `debug` | `info` |
-| `API_BASE_URL` | `http://localhost:5000/api` | preview alias | `https://shopsphere-store-api.vercel.app/api` |
-| `REVIEW_SERVICE_URL` | `http://localhost:5100/api` | preview alias | `https://shopsphere-reviews.vercel.app/api` |
-| `WEB_BASE_URL` | `http://localhost:3000` | per deployment | `https://shopsphere-storefront.vercel.app` |
+| `API_BASE_URL` | `http://localhost:5000/api` | `https://shopsphere-store-api-shady-79d4.vercel.app/api` | `https://shopsphere-store-api.vercel.app/api` |
+| `REVIEW_SERVICE_URL` | `http://localhost:5100/api` | `https://shopsphere-reviews-shady-79d4.vercel.app/api` | `https://shopsphere-reviews.vercel.app/api` |
+| `WEB_BASE_URL` | `http://localhost:3000` | — | `https://shopsphere-storefront.vercel.app` |
+| `VERCEL_TARGET` | — | `preview` | `production` |
+
+Two of the cells are deliberately empty. `staging` carries no `WEB_BASE_URL`
+because a preview storefront is given a fresh URL per deployment, so there is no
+fixed address to record; the smoke job that reads `WEB_BASE_URL` runs only under
+`production`. `development` carries no `VERCEL_TARGET` because it never deploys
+to Vercel — it runs under Docker Compose on the developer's machine.
 
 ## Seeing it without signing in to anything
 
