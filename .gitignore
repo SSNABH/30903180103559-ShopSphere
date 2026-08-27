@@ -41,3 +41,9 @@ Thumbs.db
 
 # Prisma local artifacts
 backend/prisma/dev.db*
+
+# The submitted links document. It carries the evaluator's sign-in details for
+# the live production accounts, so it is uploaded to the submission platform
+# rather than published here. Its contents are mirrored, without those
+# credentials, in 30903180103559-ShopSphere.md.
+/30903180103559-ShopSphere.pdf
