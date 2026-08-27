@@ -130,8 +130,9 @@ Email: customer@deci-project.local
 Password: Customer123!
 
 The accounts for the deployed production application are different. They are
-listed in 30903180103559-ShopSphere.md, and are kept in that one file only so
-they cannot fall out of step with each other.
+listed in the submitted 30903180103559-ShopSphere.pdf and are deliberately kept
+out of this repository, because they open a live account on the production
+deployment and no working credential belongs in a public repository.
 
 LOCAL DEVELOPMENT WITHOUT DOCKER
 Requirements:
