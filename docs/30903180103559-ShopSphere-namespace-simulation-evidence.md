@@ -120,6 +120,20 @@ cannot see or reach one another's resources.
 
 ---
 
+## Re-verified before submission
+
+The four conditions were checked again on 27 August 2026, against the same
+running cluster, immediately before this project was submitted:
+
+| Check | Result |
+|---|---|
+| `aws-simulation` frontend through `kubectl port-forward :8081` | `HTTP 200` |
+| `gcp-simulation` frontend through `kubectl port-forward :8082` | `HTTP 200` |
+| `aws-simulation` backend `/api/health` through `:8091` | `{"success":true,"status":"healthy"}` |
+| `gcp-simulation` backend `/api/health` through `:8092` | `{"success":true,"status":"healthy"}` |
+| Pods and Services present in both namespaces | 2 pods + 2 Services each |
+| Cross-namespace lookup by pod name | `NotFound` in both directions |
+
 ## Reproducing
 
 ```bash

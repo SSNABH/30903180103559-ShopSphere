@@ -4,74 +4,48 @@
 
 ## How a failed release is detected
 
-**UptimeRobot** monitors `https://shopsphere-store-api.vercel.app/api/health`
-every 5 minutes. That endpoint runs `SELECT 1` against Supabase and checks the
-MongoDB connection, so it returns **503** when either database is unreachable
-and **200** only when the whole stack is healthy. Status page:
+**UptimeRobot** polls `https://shopsphere-store-api.vercel.app/api/health` every
+5 minutes. That endpoint runs `SELECT 1` against Supabase and checks the MongoDB
+connection, so it returns **503** whenever either database is unreachable and
+**200** only when the whole stack is healthy. Public status page:
 `https://stats.uptimerobot.com/LBmw2iOvH5`
 
-Three signals, in the order they usually arrive:
+Three signals, in the order they arrive:
 
-1. **The pipeline's smoke job fails.** After deploying, the workflow curls the
-   API health, review service health, and storefront. A non-200 fails the run
-   immediately — this catches most bad releases within a minute.
+1. **The pipeline's smoke job fails.** After deploying, it checks every URL
+   published in the links document. A non-200 fails the run within a minute, so
+   most bad releases are caught before anyone else sees them.
 2. **UptimeRobot alerts.** The monitor flips to Down and emails. This is the
-   safety net for a release that passed the smoke check but broke afterwards.
-3. **Error rate rises in the logs.** Vercel Dashboard → project → Logs,
-   filtered on `"level":"error"`. Use this to confirm the cause, not to detect.
+   safety net for a release that passed the smoke check and broke afterwards.
+3. **Errors rise in the logs.** Vercel Dashboard → project → Logs, filtered on
+   `"level":"error"`. Use this to confirm the cause, not to detect it.
 
 ## Steps to restore the previous working version
 
-**1. Confirm it is the release, not the dependencies.** (30 seconds)
+1. **Confirm it is the release, not the dependencies** — 30 seconds.
+   `curl -s https://shopsphere-store-api.vercel.app/api/health`. If
+   `checks.postgresql` or `checks.mongodb` is `false`, the deployment is probably
+   innocent; check Supabase and Atlas status before rolling back.
 
-```bash
-curl -s https://shopsphere-store-api.vercel.app/api/health
-```
+2. **Roll the deployment back** — about 30 seconds, no rebuild. Vercel Dashboard
+   → the affected project → **Deployments** → the last deployment marked **Ready**
+   before the bad one → **⋯** → **Instant Rollback**.
 
-If `checks.postgresql` or `checks.mongodb` is `false`, the deployment is
-probably innocent — check Supabase and Atlas status before rolling back.
+3. **Re-point the published alias.** Instant Rollback moves the project's own
+   production domain. The URLs in the links document are separate aliases, so
+   they have to be moved onto the restored deployment too, or production keeps
+   serving the broken build:
+   `vercel alias set <restored-deployment-url> shopsphere-store-api.vercel.app`
 
-**2. Roll back in the Vercel dashboard.** (about 30 seconds, no rebuild)
+4. **Confirm recovery** — 1 minute. Re-run the health check above and load
+   `https://shopsphere-storefront.vercel.app`. Allow up to 5 minutes for
+   UptimeRobot to report Up again.
 
-- Open the affected project → **Deployments**
-- Find the last deployment marked **Ready** before the bad one
-- Open its **⋯** menu → **Instant Rollback** → confirm
+5. **Revert the commit**, so the next merge does not redeploy the fault:
+   `git revert <bad-commit-sha>` then `git push origin main`. A rollback changes
+   what production serves; it does not change what `main` holds.
 
-Vercel re-points the production alias at the previous build. Nothing is
-rebuilt, so this takes effect in seconds.
-
-Or from the command line:
-
-```bash
-vercel rollback <previous-deployment-url> --token=$VERCEL_TOKEN
-```
-
-**3. Roll back only the service that broke.** The API, storefront, review
-service, and jobs deploy independently, so a bad API release does not require
-rolling back the storefront.
-
-**4. Confirm recovery.** (1 minute)
-
-```bash
-curl -s https://shopsphere-store-api.vercel.app/api/health
-curl -s -o /dev/null -w "%{http_code}\n" https://shopsphere-storefront.vercel.app
-```
-
-Wait for UptimeRobot to report Up again, which takes up to 5 minutes.
-
-**5. Revert the commit so the next deploy does not reintroduce the fault.**
-
-```bash
-git revert <bad-commit-sha>
-git push origin main
-```
-
-A rollback changes what production serves; it does not change what `main`
-holds. Without this step, the next merge redeploys the same broken code.
-
-## If a database migration was part of the release
-
-Instant Rollback restores code, not schema. If the release included a
-migration, roll the code back first to stop the bleeding, then apply a
-corrective migration forward. Do not attempt to reverse a migration that has
-already accepted writes.
+The API, storefront, review service, and jobs deploy independently, so only the
+service that broke is rolled back. If the release contained a database migration,
+roll the code back first, then fix forward with a corrective migration — do not
+reverse a migration that has already accepted writes.

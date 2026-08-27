@@ -1,6 +1,23 @@
-# DECI.Project
+# 30903180103559-ShopSphere
 
-A complete bilingual electronics e-commerce platform built against the graduation-project rubric. It combines a React storefront and Admin Dashboard with an Express API, PostgreSQL/Prisma commerce data, MongoDB reviews and activity logs, automated email, comprehensive testing, and one-command Docker delivery.
+**ShopSphere Enterprise Production and Cloud Modernization**
+Digital Egypt Cubs Initiative — Level 5 final project · Student ID 30903180103559
+
+ShopSphere is a bilingual electronics e-commerce platform: a React storefront and
+Admin Dashboard over an Express API, with commerce data in PostgreSQL on Supabase
+and reviews in MongoDB. This repository holds that platform prepared for
+production — deployed, secured, monitored, split into an independently deployed
+review service and a serverless job, and released through a CI/CD pipeline.
+
+> **Start here:** [**30903180103559-ShopSphere.md**](30903180103559-ShopSphere.md)
+> is the project links document. It carries the application, review service, and
+> repository URLs, the reviewer accounts, and a map of where each task is
+> evidenced.
+
+The storefront carries the product name *DECI.Project*, the name it was built
+under in the first semester, and it is unchanged here. The platform it belongs
+to, this repository, and every submitted document are ShopSphere: the naming
+convention applies to the deliverables, not to the application's own branding.
 
 ## Where production logs are read
 
@@ -16,7 +33,19 @@ Full detail, including the severity levels and what is redacted, is in
 
 ## Project status
 
-All six implementation phases are complete and re-verified:
+All four tasks of the Level 5 project are complete.
+
+| Task | Deliverable | Evidence |
+|---|---|---|
+| **1 — Production Deployment** | Frontend, API, Supabase PostgreSQL, HTTPS/CORS/Helmet/rate limiting, health check on UptimeRobot | [links document](30903180103559-ShopSphere.md) |
+| **2 — Cloud Preparation** | Architecture diagram, service classification, two-namespace Kubernetes simulation | [diagram](docs/30903180103559-ShopSphere-architecture.svg) · [classification](docs/30903180103559-ShopSphere-cloud-service-classification.md) · [namespace evidence](docs/30903180103559-ShopSphere-namespace-simulation-evidence.md) · [`k8s/`](k8s/) |
+| **3 — Application Modernization** | Reviews extracted into their own deployed service, serverless cleanup job, ADR | [ADR](docs/30903180103559-ShopSphere-architecture-decision-record.md) · [job evidence](docs/30903180103559-ShopSphere-serverless-job-evidence.md) · [`review-service/`](review-service/) · [`jobs/`](jobs/) |
+| **4 — Production Operations** | GitHub Actions pipeline, three environments, structured logging, rollback plan | [pipeline](.github/workflows/deploy.yml) · [environments](docs/30903180103559-ShopSphere-environments.md) · [logging](docs/30903180103559-ShopSphere-logging-and-operations.md) · [rollback plan](docs/30903180103559-ShopSphere-rollback-plan.md) |
+
+### First-semester implementation phases
+
+All six phases the platform grew out of are complete, and still covered by the
+test suite below:
 
 1. Project setup and architecture
 2. Authentication and user management
@@ -88,12 +117,16 @@ The backend applies migrations and runs the idempotent seed before starting.
 
 ## Seeded reviewer accounts
 
+These are the defaults created by the seed for a **local** run:
+
 | Role | Email | Password |
 |---|---|---|
 | Admin | `admin@deci-project.local` | `Admin123!` |
 | Customer | `customer@deci-project.local` | `Customer123!` |
 
-These are development/reviewer accounts created by the seed. They must be changed for a real deployment.
+The **production** reviewer accounts are different and are listed in the
+[links document](30903180103559-ShopSphere.md). Both sets are evaluation
+accounts and would be removed before a real launch.
 
 ## Automated verification
 
@@ -164,12 +197,18 @@ npm run dev:frontend
 ## Repository structure
 
 ```text
+30903180103559-ShopSphere.md   Project links document — the submission entry point
 frontend/                 React application and frontend tests
 backend/                  Express API and backend tests
 backend/prisma/           PostgreSQL schema, migrations, and seed
-backend/src/models/       MongoDB review and activity-log models
+backend/src/models/       MongoDB activity-log model
+backend/src/clients/      REST client for the extracted review service
 backend/uploads/          Runtime images; Docker volume mount
-.github/workflows/        Continuous integration checks
+review-service/           Independently deployed review service
+jobs/                     Serverless scheduled jobs (abandoned-cart cleanup)
+k8s/                      Namespace simulation manifests and deploy script
+docs/                     Diagram, classification, ADR, rollback, logging, environments
+.github/workflows/        Continuous integration and the production pipeline
 docker-compose.yml        Full application orchestration
 README.txt                Required plain-text submission guide
 README.md                 GitHub documentation

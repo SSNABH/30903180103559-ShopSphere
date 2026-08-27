@@ -79,15 +79,19 @@ jobs:
           - service: api
             directory: backend
             project_id_secret: VERCEL_PROJECT_ID_API
+            public_url: shopsphere-store-api.vercel.app
           - service: storefront
             directory: frontend
             project_id_secret: VERCEL_PROJECT_ID_WEB
+            public_url: shopsphere-storefront.vercel.app
           - service: reviews
             directory: review-service
             project_id_secret: VERCEL_PROJECT_ID_REVIEWS
+            public_url: shopsphere-reviews.vercel.app
           - service: jobs
             directory: jobs
             project_id_secret: VERCEL_PROJECT_ID_JOBS
+            public_url: shopsphere-jobs.vercel.app
 
     env:
       # Read from GitHub Actions secrets. No credential is written into this
@@ -115,7 +119,21 @@ jobs:
         working-directory: ${{ matrix.directory }}
 
       - name: Deploy to production
-        run: vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN"
+        id: deploy
+        run: |
+          url=$(vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN")
+          echo "Deployed $url"
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+        working-directory: ${{ matrix.directory }}
+
+      # `vercel deploy --prod` only moves the project's own production domain.
+      # The URLs published in the links document are separate aliases, so
+      # without this step the pipeline deploys somewhere the submission never
+      # points at, and the rollback plan re-points a domain nobody reads.
+      - name: Point the published URL at this deployment
+        run: |
+          vercel alias set "${{ steps.deploy.outputs.url }}" "${{ matrix.public_url }}"             --token="$VERCEL_TOKEN" --scope="$VERCEL_ORG_ID"
+          echo "${{ matrix.public_url }} now serves ${{ steps.deploy.outputs.url }}"
         working-directory: ${{ matrix.directory }}
 
   smoke:
@@ -124,26 +142,62 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 5
+
+    # The URLs checked below are not written here. They are read from the
+    # production environment's variables, so this job proves the environment
+    # exists and is wired, rather than only asserting it in a document.
+    environment: production
+    env:
+      WEB_BASE_URL: ${{ vars.WEB_BASE_URL }}
+      API_BASE_URL: ${{ vars.API_BASE_URL }}
+      REVIEW_SERVICE_URL: ${{ vars.REVIEW_SERVICE_URL }}
+
     steps:
       # A deployment that reports success but serves errors is still a failed
-      # release. This is the same signal the rollback plan depends on.
-      - name: Check the API health endpoint
+      # release. This is the same signal the rollback plan depends on. Every URL
+      # checked here is a URL published in the links document, so the pipeline
+      # verifies what an evaluator actually opens.
+      - name: Check every published URL
         run: |
-          status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 \
-            https://shopsphere-store-api.vercel.app/api/health)
-          echo "API health returned $status"
-          test "$status" = "200"
+          fail=0
+          check() {
+            status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$1")
+            if [ "$status" = "200" ]; then
+              echo "ok    $status  $1"
+            else
+              echo "FAIL  $status  $1"
+              fail=1
+            fi
+          }
 
-      - name: Check the review service health endpoint
-        run: |
-          status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 \
-            https://shopsphere-reviews.vercel.app/api/health)
-          echo "Review service health returned $status"
-          test "$status" = "200"
+          # Everything below is derived from the production environment's
+          # variables. "${VAR%/api}" trims the suffix to give the bare origin.
+          api_origin="${API_BASE_URL%/api}"
+          reviews_origin="${REVIEW_SERVICE_URL%/api}"
 
-      - name: Check the storefront loads
+          # Storefront, including a deep link, which a SPA rewrite must serve.
+          check "$WEB_BASE_URL"
+          check "$WEB_BASE_URL/products"
+
+          # Both API origins, at the bare origin as well as under /api. The
+          # bare origin is checked because a framework preset once built a
+          # second root function that crashed there while /api stayed healthy.
+          check "$api_origin"
+          check "$API_BASE_URL"
+          check "$API_BASE_URL/health"
+          check "$reviews_origin"
+          check "$REVIEW_SERVICE_URL"
+          check "$REVIEW_SERVICE_URL/health"
+
+          # The scheduled-job project serves its description page publicly.
+          check https://shopsphere-jobs.vercel.app
+
+          exit $fail
+
+      - name: Check reviews are served by the review service, not the monolith
         run: |
-          status=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 \
-            https://shopsphere-storefront.vercel.app)
-          echo "Storefront returned $status"
-          test "$status" = "200"
+          moved=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30             "$API_BASE_URL/products/workspace-hub-8/reviews")
+          served=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30             "$REVIEW_SERVICE_URL/products/workspace-hub-8/reviews")
+          echo "main API returned $moved, review service returned $served"
+          test "$moved" = "404"
+          test "$served" = "200"
