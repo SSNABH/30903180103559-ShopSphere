@@ -1,0 +1,61 @@
+# ShopSphere storefront.
+#
+# The Vite build bakes the API base URL in at image build time, so the image is
+# built against the public API rather than the in-cluster Service. That keeps
+# the port-forwarded storefront fully working in a browser.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopsphere-frontend
+  labels:
+    app.kubernetes.io/name: shopsphere-frontend
+    app.kubernetes.io/component: frontend
+    app.kubernetes.io/part-of: shopsphere
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: shopsphere-frontend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: shopsphere-frontend
+        app.kubernetes.io/component: frontend
+        app.kubernetes.io/part-of: shopsphere
+    spec:
+      containers:
+        - name: web
+          image: shopsphere-frontend:local
+          imagePullPolicy: Never
+          ports:
+            - name: http
+              containerPort: 80
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopsphere-frontend
+  labels:
+    app.kubernetes.io/name: shopsphere-frontend
+    app.kubernetes.io/part-of: shopsphere
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: shopsphere-frontend
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

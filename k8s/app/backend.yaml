@@ -1,0 +1,87 @@
+# ShopSphere API.
+#
+# This manifest carries no namespace of its own, so the same file is applied
+# into both simulated providers with `kubectl apply -f k8s/app -n <namespace>`.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopsphere-backend
+  labels:
+    app.kubernetes.io/name: shopsphere-backend
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/part-of: shopsphere
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: shopsphere-backend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: shopsphere-backend
+        app.kubernetes.io/component: backend
+        app.kubernetes.io/part-of: shopsphere
+    spec:
+      containers:
+        - name: api
+          image: shopsphere-backend:local
+          # The image is built straight into the local Docker Desktop daemon,
+          # which the cluster shares, so there is no registry to pull from.
+          imagePullPolicy: Never
+          # The image's default entrypoint runs migrations and seeding before
+          # starting. Both already ran against Supabase, so the server is
+          # started directly instead of repeating them once per namespace.
+          command: ["node", "src/server.js"]
+          ports:
+            - name: http
+              containerPort: 5000
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "5000"
+            - name: CORS_ORIGIN
+              value: "*"
+            # A pod that cannot reach the databases should still start and
+            # serve, so the failure is visible on /api/health rather than as a
+            # crash loop with no diagnosis.
+            - name: DATABASE_CONNECTION_REQUIRED
+              value: "false"
+          envFrom:
+            - secretRef:
+                name: shopsphere-secrets
+          readinessProbe:
+            httpGet:
+              path: /api/health/live
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/health/live
+              port: http
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopsphere-backend
+  labels:
+    app.kubernetes.io/name: shopsphere-backend
+    app.kubernetes.io/part-of: shopsphere
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: shopsphere-backend
+  ports:
+    - name: http
+      port: 5000
+      targetPort: http

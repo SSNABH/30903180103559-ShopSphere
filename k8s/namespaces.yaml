@@ -1,0 +1,20 @@
+# Two namespaces standing in for two cloud providers.
+#
+# Kubernetes namespaces give each simulated provider its own scope: identical
+# workloads are deployed into both, and resources in one are not visible from
+# the other. The names are fixed by the project specification.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: aws-simulation
+  labels:
+    simulated-provider: aws
+    app.kubernetes.io/part-of: shopsphere
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gcp-simulation
+  labels:
+    simulated-provider: gcp
+    app.kubernetes.io/part-of: shopsphere
