@@ -1,0 +1,26 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ShopSphere Scheduled Jobs</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+         max-width: 42rem; margin: 0 auto; padding: 3rem 1.25rem; }
+  h1 { font-size: 1.4rem; margin: 0 0 .25rem; }
+  p.lede { margin: 0 0 2rem; opacity: .7; }
+  dt { font-weight: 600; margin-top: 1rem; }
+  dd { margin: .15rem 0 0; opacity: .85; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; }
+</style>
+<h1>ShopSphere Scheduled Jobs</h1>
+<p class="lede">Background maintenance, deployed separately from the API.</p>
+<dl>
+  <dt>Abandoned cart cleanup</dt>
+  <dd><code>/api/cleanup-carts</code> — deletes carts untouched for 30 days,
+      cascading to their items.</dd>
+  <dt>Schedule</dt>
+  <dd>Daily at 03:00 UTC, invoked by Vercel Cron.</dd>
+  <dt>Access</dt>
+  <dd>The endpoint requires a bearer secret and returns <code>401</code>
+      without one, so it cannot be triggered from a browser.</dd>
+</dl>

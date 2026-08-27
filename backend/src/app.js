@@ -102,6 +102,14 @@ export function createApp(options = {}) {
   application.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
   application.use('/api', generalLimiter);
 
+  // The submission links point at the bare origin, and Vercel's catch-all
+  // rewrite hands "/" to this function too. Answer it the same way as /api
+  // rather than letting it fall through to the not-found handler.
+  application.get('/', (req, res) => {
+    void req;
+    res.json({ success: true, name: 'DECI.Project API', version: '1.0.0', documentation: '/api/health' });
+  });
+
   application.get('/api', (req, res) => {
     void req;
     res.json({ success: true, name: 'DECI.Project API', version: '1.0.0', documentation: '/api/health' });
