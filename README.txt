@@ -1,7 +1,7 @@
 DECI.Project - Full-Stack Electronics E-Commerce Platform
 
 GITHUB REPOSITORY
-https://github.com/SSNABH/fullstack-ecommerce-shady-sameh
+https://github.com/SSNABH/30903180103559-ShopSphere
 
 PROJECT SUMMARY
 DECI.Project is a complete bilingual electronics e-commerce platform. Customers can register, sign in, browse and search products, filter and sort the catalog, view product details and reviews, manage a persistent shopping cart, complete a simulated checkout, and review their orders. Administrators have protected tools for product, category, image, and inventory management, plus registered-user listing, review statistics, store statistics, and activity-log review.
@@ -169,7 +169,7 @@ IMPORTANT NOTES
 - Mailpit is a development inbox used to verify welcome emails locally.
 - Seed scripts are idempotent and can be run again safely.
 - Test account passwords are development-only credentials and should be changed for a real deployment.
-- The required GitHub repository name is: fullstack-ecommerce-shady-sameh
+- The required GitHub repository name is: 30903180103559-ShopSphere
 - The repository must be public and accessible without signing in.
 
 REPOSITORY STRUCTURE
