@@ -11,8 +11,9 @@ review service and a serverless job, and released through a CI/CD pipeline.
 
 > **Start here:** [**30903180103559-ShopSphere.md**](30903180103559-ShopSphere.md)
 > is the project links document. It carries the application, review service, and
-> repository URLs, the reviewer accounts, and a map of where each task is
-> evidenced.
+> repository URLs, and a map of where each task is evidenced. The production
+> sign-in details are in the submitted `30903180103559-ShopSphere.pdf`, which is
+> kept out of this repository because those accounts are live.
 
 The storefront carries the product name *DECI.Project*, the name it was built
 under in the first semester, and it is unchanged here. The platform it belongs
@@ -124,9 +125,10 @@ These are the defaults created by the seed for a **local** run:
 | Admin | `admin@deci-project.local` | `Admin123!` |
 | Customer | `customer@deci-project.local` | `Customer123!` |
 
-The **production** reviewer accounts are different and are listed in the
-[links document](30903180103559-ShopSphere.md). Both sets are evaluation
-accounts and would be removed before a real launch.
+The **production** reviewer accounts are different and are listed in the submitted
+`30903180103559-ShopSphere.pdf`, not in this repository: they open a live account
+on the production deployment, and no working credential belongs in a public repo.
+Both sets are evaluation accounts and would be removed before a real launch.
 
 ## Automated verification
 
