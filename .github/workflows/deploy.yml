@@ -194,6 +194,29 @@ jobs:
 
           exit $fail
 
+      - name: Check the storefront bundle actually points at the API
+        run: |
+          # A 200 from the storefront says nothing about whether its build got
+          # the API URL. Vercel can mark an environment variable Sensitive, and
+          # `vercel pull` then writes the literal string "[SENSITIVE]" in place
+          # of the value, which Vite compiles into the bundle. The page still
+          # loads; every request it makes goes to the wrong place.
+          bundle=$(curl -s --max-time 30 "$WEB_BASE_URL"             | grep -oE '/assets/index-[A-Za-z0-9._-]+\.js' | head -1)
+          test -n "$bundle" || { echo "FAIL: no bundle found on the page"; exit 1; }
+          echo "bundle: $bundle"
+          curl -s --max-time 60 "$WEB_BASE_URL$bundle" > bundle.js
+
+          if grep -q "\[SENSITIVE\]" bundle.js; then
+            echo "FAIL: the bundle contains the literal string [SENSITIVE]."
+            echo "A VITE_ variable is marked Sensitive on the Vercel project."
+            echo "Re-add it with: vercel env add <NAME> production --no-sensitive"
+            exit 1
+          fi
+
+          grep -q "$API_BASE_URL" bundle.js             || { echo "FAIL: bundle does not reference $API_BASE_URL"; exit 1; }
+          grep -q "$REVIEW_SERVICE_URL" bundle.js             || { echo "FAIL: bundle does not reference $REVIEW_SERVICE_URL"; exit 1; }
+          echo "ok: the storefront bundle calls the API and the review service"
+
       - name: Check reviews are served by the review service, not the monolith
         run: |
           moved=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30             "$API_BASE_URL/products/workspace-hub-8/reviews")

@@ -64,3 +64,14 @@ $ curl -s https://shopsphere-store-api.vercel.app/api/health
 
 A preview deployment of the same code answers `"environment":"staging"`, and a
 local container answers `"environment":"development"`.
+
+## One caution about sensitive variables
+
+The storefront's `VITE_API_BASE_URL` and `VITE_REVIEW_SERVICE_URL` are stored as
+**non-sensitive**, deliberately. They are compiled into public client JavaScript,
+so they are not secrets — and a variable marked Sensitive cannot be read back by
+`vercel pull`, which writes the literal string `[SENSITIVE]` in its place. Vite
+then compiles that string in as the API address: the page still loads, but every
+request it makes goes nowhere. The pipeline's smoke job now downloads the
+deployed bundle and fails the release if that string appears in it, or if the
+two URLs above do not.
