@@ -74,7 +74,7 @@ function createTestApp(userRepository) {
   app.use(cookieParser());
   app.get('/api', (req, res) => {
     void req;
-    res.json({ success: true, name: 'DECI.Project API', version: '1.0.0' });
+    res.json({ success: true, name: 'ShopSphere API', version: '1.0.0' });
   });
   app.use('/api/auth', createAuthRouter({ authService, userRepository }));
   app.use('/api/users', createUserRouter({ userService, userRepository }));
@@ -91,7 +91,7 @@ describe('critical API endpoints through Supertest', () => {
       .get('/api')
       .expect(200)
       .expect(({ body }) => {
-        expect(body).toMatchObject({ success: true, name: 'DECI.Project API' });
+        expect(body).toMatchObject({ success: true, name: 'ShopSphere API' });
       });
 
     await request(app)

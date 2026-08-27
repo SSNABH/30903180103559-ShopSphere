@@ -1,20 +1,46 @@
-DECI.Project - Full-Stack Electronics E-Commerce Platform
+30903180103559-ShopSphere - ShopSphere Enterprise Production and Cloud Modernization
+Digital Egypt Cubs Initiative, Level 5 final project. Student ID 30903180103559.
 
 GITHUB REPOSITORY
 https://github.com/SSNABH/30903180103559-ShopSphere
 
-PROJECT SUMMARY
-DECI.Project is a complete bilingual electronics e-commerce platform. Customers can register, sign in, browse and search products, filter and sort the catalog, view product details and reviews, manage a persistent shopping cart, complete a simulated checkout, and review their orders. Administrators have protected tools for product, category, image, and inventory management, plus registered-user listing, review statistics, store statistics, and activity-log review.
+PROJECT LINKS DOCUMENT
+30903180103559-ShopSphere.md, in the root of this repository, is the entry point
+for the submission. It holds the application, review service, and repository
+URLs, the production reviewer accounts, and a map of where each task is
+evidenced.
 
-The interface supports English and Arabic, left-to-right and right-to-left layouts, responsive screens, and persistent light and dark themes.
+PROJECT SUMMARY
+ShopSphere is a complete bilingual electronics e-commerce platform. Customers can
+register, sign in, browse and search products, filter and sort the catalog, view
+product details and reviews, manage a persistent shopping cart, complete a
+simulated checkout, and review their orders. Administrators have protected tools
+for product, category, image, and inventory management, plus registered-user
+listing, review statistics, store statistics, and activity-log review.
+
+The interface supports English and Arabic, left-to-right and right-to-left
+layouts, responsive screens, and persistent light and dark themes.
+
+This Level 5 project takes that platform into production: it is deployed to
+Vercel behind public URLs, connected to PostgreSQL on Supabase, secured, watched
+by UptimeRobot, split so that reviews run as an independently deployed service
+and abandoned-cart cleanup runs as a serverless function, and released through a
+GitHub Actions pipeline with three environments and a documented rollback plan.
+
+The storefront was built in the first semester under the working name
+DECI.Project. Some seeded product data, order numbers, and e-mail templates still
+carry that name. The platform, this repository, and every submitted document are
+ShopSphere.
 
 PROJECT STATUS
-Task 1 - Project setup and architecture: COMPLETE
-Task 2 - Authentication and user management: COMPLETE
-Task 3 - Product and shopping features: COMPLETE
-Task 4 - Frontend development: COMPLETE
-Task 5 - Database and additional services: COMPLETE
-Task 6 - Testing and project delivery preparation: COMPLETE
+Task 1 - Production Deployment: COMPLETE
+Task 2 - Cloud Preparation: COMPLETE
+Task 3 - Application Modernization: COMPLETE
+Task 4 - Production Operations: COMPLETE
+
+The first-semester implementation phases the platform grew out of - setup and
+architecture, authentication, catalog and cart, frontend, database services, and
+testing - are complete and still covered by the test suite.
 
 TECHNOLOGIES USED
 Frontend:
@@ -70,6 +96,15 @@ Docker Compose starts:
 The backend automatically applies database migrations and runs the idempotent seed before starting the API.
 
 PROJECT URLS
+Production (the deployment being submitted):
+Application: https://shopsphere-storefront.vercel.app
+Main API: https://shopsphere-store-api.vercel.app/api
+Health Check: https://shopsphere-store-api.vercel.app/api/health
+Review Service: https://shopsphere-reviews.vercel.app/api
+Scheduled Jobs: https://shopsphere-jobs.vercel.app
+Uptime Status Page: https://stats.uptimerobot.com/LBmw2iOvH5
+
+Local (Docker Compose):
 Frontend: http://localhost:3000
 Backend: http://localhost:5000/api
 Health Check: http://localhost:5000/api/health
@@ -78,7 +113,17 @@ Readiness Check: http://localhost:5000/api/health/ready
 Mailpit Inbox: http://localhost:8025
 
 TEST ACCOUNTS
-These accounts are created by the included seed data.
+Production, for the deployed application:
+
+Admin
+Email: admin@shopsphere.local
+Password: Admin123!
+
+Customer
+Email: customer@shopsphere.local
+Password: Customer123!
+
+Local, created by the included seed data when running with Docker:
 
 Admin
 Email: admin@deci-project.local
@@ -150,7 +195,8 @@ KEY FEATURES
 - Multiple product image upload
 - Persistent server-side cart
 - Simulated atomic checkout and order history
-- MongoDB product reviews and activity logs
+- Product reviews served by an independently deployed review service over REST
+- MongoDB activity logs
 - Nodemailer welcome email delivered to Mailpit
 - Admin store statistics dashboard
 - English/Arabic, LTR/RTL, light/dark, responsive frontend
@@ -173,6 +219,11 @@ IMPORTANT NOTES
 - The repository must be public and accessible without signing in.
 
 REPOSITORY STRUCTURE
+30903180103559-ShopSphere.md   Project links document; the submission entry point
+docs/                     Diagram, classification, ADR, rollback, logging, environments
+review-service/           Independently deployed review service
+jobs/                     Serverless scheduled jobs
+k8s/                      Namespace simulation manifests
 frontend/                 React application and component tests
 backend/                  Express API, Prisma, MongoDB models, and backend tests
 backend/prisma/           Schema, migrations, and seed

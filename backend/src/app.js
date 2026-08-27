@@ -107,12 +107,12 @@ export function createApp(options = {}) {
   // rather than letting it fall through to the not-found handler.
   application.get('/', (req, res) => {
     void req;
-    res.json({ success: true, name: 'DECI.Project API', version: '1.0.0', documentation: '/api/health' });
+    res.json({ success: true, name: 'ShopSphere API', version: '1.0.0', documentation: '/api/health' });
   });
 
   application.get('/api', (req, res) => {
     void req;
-    res.json({ success: true, name: 'DECI.Project API', version: '1.0.0', documentation: '/api/health' });
+    res.json({ success: true, name: 'ShopSphere API', version: '1.0.0', documentation: '/api/health' });
   });
   application.use('/api/health', healthRouter);
   application.use('/api/auth', authLimiter, createAuthRouter({ authService, userRepository }));

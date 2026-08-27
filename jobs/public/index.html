@@ -21,6 +21,10 @@
   <dt>Schedule</dt>
   <dd>Daily at 03:00 UTC, invoked by Vercel Cron.</dd>
   <dt>Access</dt>
-  <dd>The endpoint requires a bearer secret and returns <code>401</code>
+  <dd>The cleanup endpoint requires a bearer secret and returns <code>401</code>
       without one, so it cannot be triggered from a browser.</dd>
+  <dt>Public status</dt>
+  <dd><a href="/api/status"><code>/api/status</code></a> runs the same function
+      and the same database connection without deleting anything, so the job can
+      be seen executing without access to this Vercel account.</dd>
 </dl>
