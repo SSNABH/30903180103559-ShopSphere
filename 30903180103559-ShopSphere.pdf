@@ -1,0 +1,274 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document (opensource)
+1 0 obj
+<<
+/F1 2 0 R /F2 3 0 R /F3 13 0 R /F4 27 0 R
+>>
+endobj
+2 0 obj
+<<
+/BaseFont /Helvetica /Encoding /WinAnsiEncoding /Name /F1 /Subtype /Type1 /Type /Font
+>>
+endobj
+3 0 obj
+<<
+/BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding /Name /F2 /Subtype /Type1 /Type /Font
+>>
+endobj
+4 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://shopsphere-storefront.vercel.app)
+>> /Border [ 0 0 0 ] /Rect [ 160.4016 680.1854 323.0116 693.1854 ] /Subtype /Link /Type /Annot
+>>
+endobj
+5 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://shopsphere-reviews.vercel.app/api)
+>> /Border [ 0 0 0 ] /Rect [ 160.4016 657.1854 330.16 670.1854 ] /Subtype /Link /Type /Annot
+>>
+endobj
+6 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere)
+>> /Border [ 0 0 0 ] /Rect [ 160.4016 634.1854 401.782 647.1854 ] /Subtype /Link /Type /Annot
+>>
+endobj
+7 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://shopsphere-store-api.vercel.app/api)
+>> /Border [ 0 0 0 ] /Rect [ 160.4016 566.1854 334.7692 579.1854 ] /Subtype /Link /Type /Annot
+>>
+endobj
+8 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://shopsphere-store-api.vercel.app/api/health)
+>> /Border [ 0 0 0 ] /Rect [ 160.4016 543.1854 362.3876 556.1854 ] /Subtype /Link /Type /Annot
+>>
+endobj
+9 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://stats.uptimerobot.com/LBmw2iOvH5)
+>> /Border [ 0 0 0 ] /Rect [ 160.4016 507.1854 337.3084 520.1854 ] /Subtype /Link /Type /Annot
+>>
+endobj
+10 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://shopsphere-jobs.vercel.app)
+>> /Border [ 0 0 0 ] /Rect [ 160.4016 471.1854 301.0236 484.1854 ] /Subtype /Link /Type /Annot
+>>
+endobj
+11 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://shopsphere-jobs.vercel.app/api/status)
+>> /Border [ 0 0 0 ] /Rect [ 160.4016 435.1854 342.9572 448.1854 ] /Subtype /Link /Type /Annot
+>>
+endobj
+12 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/actions)
+>> /Border [ 0 0 0 ] /Rect [ 160.4016 412.1854 405.8668 425.1854 ] /Subtype /Link /Type /Annot
+>>
+endobj
+13 0 obj
+<<
+/BaseFont /Courier /Encoding /WinAnsiEncoding /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+14 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/blob/main/docs/30903180103559-ShopSphere-architecture.svg)
+>> /Border [ 0 0 0 ] /Rect [ 77.48442 118.4954 162.3544 129.5354 ] /Subtype /Link /Type /Annot
+>>
+endobj
+15 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/blob/main/docs/30903180103559-ShopSphere-cloud-service-classification.md)
+>> /Border [ 0 0 0 ] /Rect [ 77.48442 103.4954 187.912 114.5354 ] /Subtype /Link /Type /Annot
+>>
+endobj
+16 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/blob/main/docs/30903180103559-ShopSphere-namespace-simulation-evidence.md)
+>> /Border [ 0 0 0 ] /Rect [ 77.48442 88.49543 209.9092 99.53543 ] /Subtype /Link /Type /Annot
+>>
+endobj
+17 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/tree/main/k8s)
+>> /Border [ 0 0 0 ] /Rect [ 274.1712 88.49543 291.044 99.53543 ] /Subtype /Link /Type /Annot
+>>
+endobj
+18 0 obj
+<<
+/Annots [ 4 0 R 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 14 0 R 
+  15 0 R 16 0 R 17 0 R ] /Contents 32 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 31 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+19 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/tree/main/review-service)
+>> /Border [ 0 0 0 ] /Rect [ 378.6464 760.4954 439.9828 771.5354 ] /Subtype /Link /Type /Annot
+>>
+endobj
+20 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/blob/main/docs/30903180103559-ShopSphere-serverless-job-evidence.md)
+>> /Border [ 0 0 0 ] /Rect [ 77.48442 704.4954 175.1424 715.5354 ] /Subtype /Link /Type /Annot
+>>
+endobj
+21 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/blob/main/docs/30903180103559-ShopSphere-architecture-decision-record.md)
+>> /Border [ 0 0 0 ] /Rect [ 77.48442 689.4954 191.5 700.5354 ] /Subtype /Link /Type /Annot
+>>
+endobj
+22 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/actions)
+>> /Border [ 0 0 0 ] /Rect [ 77.48442 644.4954 130.6604 655.5354 ] /Subtype /Link /Type /Annot
+>>
+endobj
+23 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/blob/main/docs/30903180103559-ShopSphere-environments.md)
+>> /Border [ 0 0 0 ] /Rect [ 143.2828 644.4954 222.0256 655.5354 ] /Subtype /Link /Type /Annot
+>>
+endobj
+24 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/blob/main/docs/30903180103559-ShopSphere-logging-and-operations.md)
+>> /Border [ 0 0 0 ] /Rect [ 77.48442 629.4954 173.6336 640.5354 ] /Subtype /Link /Type /Annot
+>>
+endobj
+25 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/blob/main/docs/30903180103559-ShopSphere-rollback-plan.md)
+>> /Border [ 0 0 0 ] /Rect [ 77.48442 614.4954 132.7028 625.5354 ] /Subtype /Link /Type /Annot
+>>
+endobj
+26 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://github.com/SSNABH/30903180103559-ShopSphere/blob/main/30903180103559-ShopSphere.md)
+>> /Border [ 0 0 0 ] /Rect [ 262.5884 599.4954 403.744 610.5354 ] /Subtype /Link /Type /Annot
+>>
+endobj
+27 0 obj
+<<
+/BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding /Name /F4 /Subtype /Type1 /Type /Font
+>>
+endobj
+28 0 obj
+<<
+/Annots [ 19 0 R 20 0 R 21 0 R 22 0 R 23 0 R 24 0 R 25 0 R 26 0 R ] /Contents 33 0 R /MediaBox [ 0 0 595.2756 841.8898 ] /Parent 31 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+29 0 obj
+<<
+/PageMode /UseNone /Pages 31 0 R /Type /Catalog
+>>
+endobj
+30 0 obj
+<<
+/Author (Student ID 30903180103559) /CreationDate (D:20260827185108+03'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260827185108+03'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (ShopSphere Enterprise Production and Cloud Modernization - Project Links Document) /Title (30903180103559-ShopSphere) /Trapped /False
+>>
+endobj
+31 0 obj
+<<
+/Count 2 /Kids [ 18 0 R 28 0 R ] /Type /Pages
+>>
+endobj
+32 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2307
+>>
+stream
+GauHMh,`Pq'#)[je6[!8%OdWSbP#6o%J8(sQl2?'*^Hu!,-WB&,_ogS4T$8B:?",+UF1"JYk:ppT;k(TPq`CQ!;:p6$K0A97\;En&1.p<,8@uT(9T$;mt5L'6.??TaA)1l.)Hi2;F"*D"E=Vo%WFllka>Z(DN,gZ-jU+gJOCp%E>$0bJftH+JD`9"!K#k'HotL'\=Rcd!WE/1&i3s!$.lMMg;7DW2=O$A/!q%ZIKm9/_+TUa"d;HDr8L]?b6nE*BgOc?h6@h&gfs;cn9qNEP&r0#1dNjQ,KQq%pAkULV)/2eA.cg1+<6/>oV6g86r(V_EsOaH#_g4UZeN>+-+9j?BMXTs=ZAk,+<7rLg\/hmp\t?^4qAM(!5=bblWO\6iD-GJafSAPQn71$<)!D.We,"8rl<f@YH62r\G&\TI!I.0=\)T)SKE,p!W3/>^Y5=Jd::]U4WN4Ri6oK//(fOA#b8d)EUB,)pOL3O4M^H/kIKILG9Hho'gsK?@@.Z5TS2i1q*FK`mR#V@m"9h:Zji@pPsR[&_rfFPmj9Gu`M"i[.4'L")C5E,igj(+K8_";,ZtQ=1]u"]iKo,M1$CH1?-0.RN:=7%"Ch:01Xi1g)/<<N%?-4V/k*MJY&-)VJ0:#NCS;T/,`Dbd+AUAs:tiMU:8.FfTlY!boC()JbZ/M-*1RtK1k3kE>.!3Kk9XS[]i1[/_Xp4rh"-6XcX=7hLn#R*?mYOf0[O,@dfX!rC9\"spgb5kap>'?b@)JPZ2$1akKO_&WZ$l;^Kl5u)81a(^CDq[%T(kVD+^>WJ5W:Dj<t."nE_APU5he(%#$[:m`@2?)[K#b+=)C9d;BiHqP,lO/IVFDK8nK3<VrLLj7P=fG#J_#c_M9851^cso=M?%bHj`F7^8bTiUqfg(XI.F,hTX]:oM%+gdRlN/e'oN4'.CF,A'ipR@g@,aVR#TEeY(1A":u2P4Q2_CSe/^j[ahI)*XXaE>J0Pg-*-;TlC^:-ouih6Gg^tQ\2QR(AV8>IElSI4?[+>hZa+Y].gbRXL*&ik<+5t8fVkSe4N8Y(ml`KG[O!^YOar*K&BW'r)$ZqEA3^3Aeb`lR`u?"BGcq3K4C<,W:;?O2-&5VqsC<H3>B4]DW3g@d-+GbN:T%_RZ\I;2"Hecg!oMiV?]CYP4s$b7lB\knU&W=:6jph<RW`P?"q+SjEYfG[^QnKrXejDg%=+8TC(ugNQWuMb:BM[btB3]!A`/a1l%jf<;GDj&t]d-<MB4m#nWt*56l1hbG5:T]J2hDC+,#;,?_YtLc5sAGb#\6NC8]Oc$[Z>V0u3DE*Pl?T"$q[>)r'qW<bY(!]&`S!m>Z88:+&(J`GdsO,3LmO,1M5pGc;qFAZ"($=bs"8fqCZ]iFE[Z,)s_s/c"tPq$G.:AG#+KHm"W:'#8l%`pq!T_Q*7N)^TW$u^M;j75t':B5bl'p^cHJG=@igL%Y]/Gf'\c"c*YWp,7^1CXig=)VN9r^?F6j'Cd$=NmSAaHuuikJ6pKlcM'/=[)RIhQ>aoRJBf:?(Aa;mm4N.T>g[);&Cg("%)-];fH-k[O&^f*B\<,&hA4RWcAL!\*$4&"k8->\A'(\N[PB)8l!RSbWGo\o6s4&MV"\NE@'uaqN,Z/a1"\k>!MF8p27!@fX5#:mFH1"&>QZ?hV2ZKT3W+hbJH2hV_!=<s%eoN[gARF'fq,]R?f%P5ONG!Yc2Z&GZU\n<%r/W=b+qn)sOC)Y-l[^6!NM&a[)<&Pj2i#e!G78/h?dr!E5sFm]pCOe,,6h-"hrSF/3@&N86Z@Lcu1+n2840b1N-Ej);EP[W,6P.5UnGKh@:#ZPM,4#otLLpE!W@>IR6;h"-pfQ>>*+?uhYES2oe9;7(7Cp^51ph_]nSBm\tgE9"f.4i9T'0eI\*Id'09MIi;!K6M9bFDsQ2$?,JRn!hG[DL;YT^Yb*ui.dR5[iT/+/;I,&_KU$&=b9:hf3Z2.]o)sqpDYV>[uH\cW<HErN5Fqh(@8kX%:RWDXR?TWf!odH[=p8+=C^Nh;U'lB[G;FmJs3U+DkB;l9rVuRkG\q;g2\TY:M&3J=jfj;Uh^,qcsNI5/)7`\*k8,/(b-[Jb=tJd4Ygb&3,i..hj&9Qiq>J=WAlti'T#S77tbj<I:g+?]OlKiB99MRR"!,UL"ia8s(6KJ$,[.Ac\:JkD)@#7YaK+R0fC%me_jqB2;H4'#E<UsELD48,r8"Q*;ZhGZ7Tj_chG8a:?]:@jSb&c5@OJ.XQ$*h3<pe/VY!=[?\j<WmYfY&AUaP,>VRZK4=pnc=SPg07Y_RN>OUhgL;Elj?j+c_~>endstream
+endobj
+33 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1400
+>>
+stream
+GauHKgMZ%0&:O:SbZio?@7]3j[86%)('p"rC#\iWQGs]H19$A";_Rk)MihPh8Y!kk#'o`-+us;]S@MGr#7dL(bgld/cf+MS!"m"o#pNgjbV.q&5.V\UDl,(Z="0mjbpsQd1uU5u;)IBS$7t<`9a')`m:hUs&.?L10F8k\(`2^!LA;b-+]!A3AmFgZNmj2]_GiHoJJJ:#"+4-"j^eb]X)6tW;n[-hTp8^-Wsqh^&iWoZr%lQ8@K$X#fs_c:-B`*6f\Vlu+U!-RrYjUPqCU/+icLWn3/f*'et]hhj%5CZ;d__IKU;cREKEXcrSnHp`l@80!!K4W6m-J+SkJem69'P&W[_!q]eUN*0KE==^,>p3+ZbQ2%/)A<1*!*+7[?J6egO'<CZ>(DEYq/RZMPiih4AW-7/*cIB+3D%;0WT]m7(Xm3EE!0@Lgh=nd`mWL;0oF5qWQLAnfN$J"E&J(XaHTh&9ciK[V%J(@l].$\6K*h%2'jfK&3_S@7`joAX*P@V9FGi]+scFcJL]kWnFGa79bp$qmP#\])cKQkp%18[,)c[+Z_*N5jER?QcGHdVsAPnS@a"?1";J^&X)*[bC+.%"#]4*^/Vh!Tk>8';B,D!m[FeDY0OJ*W,1?Z1)'NLDPd2954gk=%pG'@WLP#e6@f"?=t</b"^lFM*<FDIgElOq_-q0s*=*"reJhu+3]<UZl?@u3X<-+!OtuPAfT*NP<LcMi/#:^`#Nfsb3c!e*WCt"m?M!DWA[<39Dgh(II/(2p_\b]JARK&7k$!8"2eb0/!S)uf9WF>VAtk3Mj^jGYk,tQ5[I%!hnO_1Dus*XXq95M/$r%>E(9ng5"=tfU#%L@N%7n:WAK4/4(hkWhHBm8JJ^T.(D[TZDj3,*NS;.taF:h"[d`)(ar4.mje'N(>$4HT9!N-oUGl"@k?rj66bNKNBNN5b>S7KW>jsHc(EKO?K0d"(Wtga_<QP)oFG$8l'-F(<\!6H!;jIfZI>+\c7ne17-2q]:`p#tsq*8)R(Wo$]ZC6qi!jZnP$7p6:mFja0)5k-P>EE`iRhpj0[Vh#mCWMRXQoH+J:-<s^149A\Gbhl>b;C=amWbpn5)Ekk^EK-1)miggojY&9Vp=2?l=kKb%\BE*<$ajXXke.nW+]UgT[1=dXQM>^kF:/9+35N7E1M.,)c::mU!Z[#h<aRQmDCekGDC.1Zr8u:0;RLsB*'KfidY5<-K#;`g,:o1<mjUT]BM.HK172f@(";-2YcO.cnj7De(`D7(;P3*EG:F+%F^!*BaNVN9+,rk7m2d&cTb^>X1^=`.;n2!CfDJDV1V4=9&Dr#Z>lkFoAFSIcD1>tT'_.T=#-O0W1.cndaaSD2(V"Q1a#u4.+(a[f"2aC](QL.;p44<8t@KGHCBsMq@=5?-WC~>endstream
+endobj
+xref
+0 34
+0000000000 65535 f 
+0000000061 00000 n 
+0000000124 00000 n 
+0000000231 00000 n 
+0000000343 00000 n 
+0000000535 00000 n 
+0000000726 00000 n 
+0000000928 00000 n 
+0000001123 00000 n 
+0000001325 00000 n 
+0000001517 00000 n 
+0000001704 00000 n 
+0000001902 00000 n 
+0000002114 00000 n 
+0000002220 00000 n 
+0000002482 00000 n 
+0000002758 00000 n 
+0000003036 00000 n 
+0000003253 00000 n 
+0000003559 00000 n 
+0000003788 00000 n 
+0000004060 00000 n 
+0000004334 00000 n 
+0000004546 00000 n 
+0000004807 00000 n 
+0000005078 00000 n 
+0000005340 00000 n 
+0000005582 00000 n 
+0000005698 00000 n 
+0000005972 00000 n 
+0000006042 00000 n 
+0000006413 00000 n 
+0000006481 00000 n 
+0000008880 00000 n 
+trailer
+<<
+/ID 
+[<0759fdaf1a3332aba7d03d2cb4d983a7><0759fdaf1a3332aba7d03d2cb4d983a7>]
+% ReportLab generated PDF document -- digest (opensource)
+
+/Info 30 0 R
+/Root 29 0 R
+/Size 34
+>>
+startxref
+10372
+%%EOF
